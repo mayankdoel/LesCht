@@ -16,7 +16,7 @@ exports.createCommunity = async (req, res) => {
       name,
       description,
       ownerId: req.user._id,
-      members: [req.user._id],
+      members: [{ userId: req.user._id, role: 'OWNER' }],
       inviteCode: generateInviteCode()
     });
 
@@ -39,7 +39,7 @@ exports.createCommunity = async (req, res) => {
 
 exports.getUserCommunities = async (req, res) => {
   try {
-    const communities = await Community.find({ members: req.user._id })
+    const communities = await Community.find({ "members.userId": req.user._id })
       .populate("channels");
     res.json(communities);
   } catch (error) {
@@ -56,11 +56,11 @@ exports.joinCommunity = async (req, res) => {
       return res.status(404).json({ error: "Invalid invite code." });
     }
 
-    if (community.members.includes(req.user._id)) {
+    if (community.members.some(m => m.userId.toString() === req.user._id.toString())) {
       return res.status(400).json({ error: "Already a member." });
     }
 
-    community.members.push(req.user._id);
+    community.members.push({ userId: req.user._id, role: 'MEMBER' });
     await community.save();
 
     res.json(community);

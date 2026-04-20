@@ -6,34 +6,34 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#E53935",
-        "primary-hover": "#D32F2F",
-        "primary-light": "#FFCDD2",
+        primary: "#F97316", // Orange 500
+        "primary-hover": "#EA580C", // Orange 600
+        "primary-light": "#FFEDD5", // Orange 100 for some text
 
         bg: {
-          main: "#FFFFFF",
-          secondary: "#FAFAFA",
-          sidebar: "#F5F5F5",
-          hover: "#FDECEC"
+          main: "#171717",
+          secondary: "#262626",
+          sidebar: "#121212",
+          hover: "#333333"
         },
 
         text: {
-          primary: "#1A1A1A",
-          secondary: "#666666",
-          muted: "#9E9E9E",
+          primary: "#F3F4F6", // Gray 100
+          secondary: "#9CA3AF", // Gray 400
+          muted: "#6B7280", // Gray 500
           onPrimary: "#FFFFFF"
         },
 
-        border: "#E0E0E0",
-        divider: "#EEEEEE",
+        border: "#374151", // Gray 700
+        divider: "#3F3F46", // Zinc 700
 
         status: {
-          online: "#4CAF50",
-          away: "#FFC107",
-          offline: "#BDBDBD"
+          online: "#22C55E",
+          away: "#EAB308",
+          offline: "#6B7280"
         },
 
-        notification: "#E53935"
+        notification: "#F97316"
       },
 
       fontFamily: {
@@ -56,7 +56,7 @@ export default {
       },
 
       boxShadow: {
-        soft: "0 4px 20px rgba(0,0,0,0.05)"
+        soft: "0 4px 20px rgba(0,0,0,0.5)"
       },
 
       spacing: {
@@ -91,15 +91,15 @@ export default {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "#666666",
+          color: "#9CA3AF",
           transition: "all 0.2s ease"
         },
         ".sidebar-icon:hover": {
-          backgroundColor: "#FDECEC",
-          color: "#E53935"
+          backgroundColor: "#333333",
+          color: "#F97316"
         },
         ".sidebar-icon-active": {
-          backgroundColor: "#E53935",
+          backgroundColor: "#F97316",
           color: "#FFFFFF"
         },
 
@@ -112,15 +112,15 @@ export default {
           borderRadius: "12px",
           cursor: "pointer",
           transition: "all 0.2s ease",
-          color: "#666666"
+          color: "#9CA3AF"
         },
         ".chat-item:hover": {
-          backgroundColor: "#FDECEC",
-          color: "#1A1A1A"
+          backgroundColor: "#333333",
+          color: "#F3F4F6"
         },
         ".chat-item-active": {
-          backgroundColor: "#FFEBEE",
-          color: "#E53935",
+          backgroundColor: "#331608", // Very dark orange tint
+          color: "#F97316",
           fontWeight: "500"
         },
 
@@ -144,7 +144,7 @@ export default {
           width: "12px",
           height: "12px",
           borderRadius: "9999px",
-          border: "2px solid white"
+          border: "2px solid #171717" // match bg-main
         },
 
         // Message Bubbles
@@ -155,14 +155,14 @@ export default {
           fontSize: "14px"
         },
         ".msg-sent": {
-          backgroundColor: "#E53935",
+          backgroundColor: "#F97316",
           color: "#FFFFFF",
           marginLeft: "auto",
           borderBottomRightRadius: "4px"
         },
         ".msg-received": {
-          backgroundColor: "#F5F5F5",
-          color: "#1A1A1A",
+          backgroundColor: "#262626", // bg-secondary
+          color: "#F3F4F6",
           marginRight: "auto",
           borderTopLeftRadius: "4px"
         },
@@ -171,11 +171,11 @@ export default {
         ".input-bar": {
           height: "56px",
           padding: "0 16px",
-          borderTop: "1px solid #EEEEEE",
+          borderTop: "1px solid #374151", // text-muted/border
           display: "flex",
           alignItems: "center",
           gap: "12px",
-          backgroundColor: "#FFFFFF"
+          backgroundColor: "#171717"
         },
 
         // Buttons
@@ -187,33 +187,34 @@ export default {
           cursor: "pointer"
         },
         ".btn-primary": {
-          backgroundColor: "#E53935",
+          backgroundColor: "#F97316",
           color: "#FFFFFF",
           border: "none"
         },
         ".btn-primary:hover": {
-          backgroundColor: "#D32F2F"
+          backgroundColor: "#EA580C"
         },
         ".btn-primary:disabled": {
-          backgroundColor: "#FFCDD2",
+          backgroundColor: "#7C2D12",
+          color: "#9CA3AF",
           cursor: "not-allowed"
         },
         ".btn-ghost": {
           backgroundColor: "transparent",
-          color: "#666666"
+          color: "#9CA3AF"
         },
         ".btn-ghost:hover": {
-          backgroundColor: "#FDECEC",
-          color: "#E53935"
+          backgroundColor: "#333333",
+          color: "#F97316"
         },
 
         // Card
         ".card": {
-          backgroundColor: "#FFFFFF",
+          backgroundColor: "#171717",
           borderRadius: "16px",
           padding: "24px",
-          boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
-          border: "1px solid #EEEEEE"
+          boxShadow: "0 4px 20px rgba(0,0,0,0.5)",
+          border: "1px solid #374151"
         }
 
       });

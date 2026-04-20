@@ -59,7 +59,7 @@ const initializeSocket = (server) => {
     });
 
     // Join user to all their Communities' Channels immediately
-    const userCommunities = await Community.find({ members: user._id }).populate("channels");
+    const userCommunities = await Community.find({ "members.userId": user._id }).populate("channels");
     userCommunities.forEach(community => {
       community.channels.forEach(channel => {
         socket.join(channel._id.toString());
