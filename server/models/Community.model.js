@@ -8,6 +8,7 @@ const CommunitySchema = new mongoose.Schema({
   inviteCode:  { type: String, unique: true },
   ownerId:     { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   members:     [{ userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, role: String }],
+  channels:    [{ type: mongoose.Schema.Types.ObjectId, ref: 'Channel' }],
   createdAt:   { type: Date, default: Date.now }
 });
 

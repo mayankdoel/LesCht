@@ -7,9 +7,7 @@ const morgan = require("morgan");
 
 const connectDB = require("./config/db");
 const { initializeSocket } = require("./socket");
-
-// Initialize internal systems
-connectDB();
+const passport = require("./config/passport");
 
 const app = express();
 const server = http.createServer(app);
@@ -25,6 +23,7 @@ app.use(cors({
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(passport.initialize());
 
 // Routes
 app.use("/api/auth", require("./routes/auth.routes"));
@@ -50,9 +49,17 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => {
-  console.log(`🚀 Server listening on port ${PORT}`);
-});
 
-// touch
-// touch 2
+const startServer = async () => {
+  try {
+    await connectDB();
+    server.listen(PORT, () => {
+      console.log(`Server listening on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error(`Startup error: ${error.message}`);
+    process.exit(1);
+  }
+};
+
+startServer();

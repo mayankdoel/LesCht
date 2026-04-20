@@ -148,3 +148,34 @@ exports.getMe = async (req, res) => {
     res.status(500).json({ error: "Server error." });
   }
 };
+
+exports.googleCallback = async (req, res) => {
+  try {
+    const user = req.user;
+    if (!user) {
+      return res.redirect(`${process.env.CLIENT_URL || "http://localhost:5173"}/login?error=google_auth_failed`);
+    }
+
+    // Generate JWT tokens
+    const { accessToken, refreshToken } = generateTokens(user._id);
+
+    // Save refresh token to DB
+    await RefreshToken.findOneAndDelete({ userId: user._id });
+    await RefreshToken.create({
+      token: refreshToken,
+      userId: user._id,
+      expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+    });
+
+    // Set user online
+    user.status = "ONLINE";
+    await user.save();
+
+    // Redirect to frontend with tokens
+    const clientURL = process.env.CLIENT_URL || "http://localhost:5173";
+    res.redirect(`${clientURL}/auth/google/callback?accessToken=${accessToken}&refreshToken=${refreshToken}`);
+  } catch (error) {
+    console.error("Google callback error:", error);
+    res.redirect(`${process.env.CLIENT_URL || "http://localhost:5173"}/login?error=server_error`);
+  }
+};
