@@ -3,12 +3,9 @@
   "version": "1.0.0",
   "description": "Lescht Monorepo",
   "private": true,
-  "workspaces": [
-    "client",
-    "server"
-  ],
   "scripts": {
-    "dev": "concurrently \"npm run dev --workspace=server\" \"npm run dev --workspace=client\""
+    "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "install:all": "npm install --prefix server && npm install --prefix client"
   },
   "keywords": [],
   "author": "",
